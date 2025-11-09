@@ -5,7 +5,7 @@ services:
     plan: free
     region: oregon  # or virginia if that's what you selected
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app_employee:app"
+    startCommand: "gunicorn app:app"
     runtime: python3
     autoDeploy: true
     envVars:
