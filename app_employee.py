@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load Excel file
-file_path = r'C:\Users\MySurface\Downloads\college-chatbot\employee-chatbot\EMPLOYEE MANAGEMENT.xlsx'
+file_path = r'C:\Users\MySurface\Downloads\college-chatbot\employee-chatbot\EMPLOYEE_MANAGEMENT.xlsx'
 
 
 try:
