@@ -7,7 +7,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Load Excel file
-file_path = r'C:\Users\MySurface\Downloads\college-chatbot\college-chatbot\EMPLOYEE MANAGEMENT .xlsx'
+file_path = r'C:\Users\MySurface\Downloads\college-chatbot\employee-chatbot\EMPLOYEE MANAGEMENT.xlsx'
+
 
 try:
     # Load all required sheets
@@ -27,7 +28,7 @@ except FileNotFoundError:
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index_employee.html')
 
 # Utility extractor
 def extract_empid_from_question(question):
