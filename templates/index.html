@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Campus Assistant</title>
+  <title>Smart employee Assistant</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -130,11 +130,11 @@
 <body>
   <div class="chat-container">
     <div class="logo-header">
-      <img src="{{ url_for('static', filename='cresledge.jpg') }}" alt="Logo">
+      <img src="{{ url_for('static', filename='empAI.jpeg') }}" alt="Logo">
     </div>
-    <h1>🎓 Smart Campus Chatbot</h1>
+    <h1> employee management chatbot</h1>
     <form id="chat-form">
-      <textarea id="question" placeholder="Ask me about Student/Parent info,SGPA, CGPA,Result of any semester, Syllabus or Timetable"></textarea>
+      <textarea id="question" placeholder="Ask me about employee/attendance,DEPT,performance,contact"></textarea>
       <button type="submit">Ask</button>
     </form>
     <div class="response-box" id="response"></div>
