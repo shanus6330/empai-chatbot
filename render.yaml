@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: college-chatbot
+    name: empai-chatbot
     env: python
     plan: free
     region: oregon  # or virginia if that's what you selected
@@ -10,4 +10,4 @@ services:
     autoDeploy: true
     envVars:
       - key: EXCEL_FILE_PATH
-        value: STUDENTS_DATA_AI_DS.xlsx
+        value: EMPLOYEE MANAGEMENT.xlsx
