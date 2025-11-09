@@ -2,13 +2,13 @@ from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import pandas as pd
 import re
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-# Load Excel file
-file_path = r'C:\Users\MySurface\Downloads\college-chatbot\employee-chatbot\EMPLOYEE_MANAGEMENT.xlsx'
-
+# ✅ Dynamically find the Excel file (works on both local + Render)
+file_path = os.path.join(os.path.dirname(__file__), 'EMPLOYEE_MANAGEMENT.xlsx')
 
 try:
     # Load all required sheets
@@ -23,20 +23,19 @@ try:
         df.columns = df.columns.str.strip().str.upper().str.replace(' ', '_')
 
 except FileNotFoundError:
-    print("❌ Excel file not found. Please check the path.")
+    print("❌ Excel file not found. Please check that 'EMPLOYEE_MANAGEMENT.xlsx' is in the same folder.")
     exit()
 
 @app.route('/')
 def home():
     return render_template('index_employee.html')
 
-# Utility extractor
+# ---------------------- Utility Extractor ----------------------
 def extract_empid_from_question(question):
     match = re.search(r'\b\d{4,}\b', question)  # assuming EMPLOYEE_ID has at least 4 digits
     return match.group(0) if match else None
 
-# ---------------------- DATA FETCH FUNCTIONS ----------------------
-
+# ---------------------- Data Fetch Functions ----------------------
 def get_employee_info(emp_id):
     emp = employee_df[employee_df['EMPLOYEE_ID'].astype(str) == str(emp_id)]
     if not emp.empty:
@@ -82,8 +81,7 @@ def get_employee_schedule(emp_id):
         }
     return {"response": "No schedule found for the provided EMPLOYEE_ID."}
 
-# ---------------------- RESPONSE FORMATTER ----------------------
-
+# ---------------------- Response Formatter ----------------------
 def format_response_data(response):
     if isinstance(response, dict):
         if any(isinstance(v, dict) or isinstance(v, list) for v in response.values()):
@@ -109,8 +107,7 @@ def format_response_data(response):
     else:
         return str(response)
 
-# ---------------------- CHAT ENDPOINT ----------------------
-
+# ---------------------- Chat Endpoint ----------------------
 @app.route('/ask', methods=['POST'])
 def ask():
     data = request.get_json()
@@ -133,7 +130,6 @@ def ask():
 
     return jsonify({'response': format_response_data(response)})
 
-# ---------------------- MAIN ----------------------
-
+# ---------------------- Main ----------------------
 if __name__ == '__main__':
     app.run(debug=True)
